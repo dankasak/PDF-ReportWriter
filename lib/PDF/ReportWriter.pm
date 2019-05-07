@@ -1297,7 +1297,8 @@ sub calculate_y_needed {
             if ( $image->{dynamic} && ref $options->{row} eq "ARRAY" ) {
                 $image->{path} = $options->{row}->[$counter];
                 $true_value = 1;
-                $counter++;
+# Commented out, as it's double-incrementing counter ( gets incremented below )
+#                $counter++;
             }
             $row_render++;
             
@@ -1458,8 +1459,7 @@ sub calculate_y_needed {
                 # get text height from data
                 $text_string = $$row[$counter];
                 $true_value = $text_string ? 1 : 0 unless $true_value;
-# Commented out, as it's double-incrementing counter ( gets incremented below )
-#                $counter++;
+                $counter++;
             }
             $row_render++ if $true_value or ! $cell->{print_if_true};
         } else {

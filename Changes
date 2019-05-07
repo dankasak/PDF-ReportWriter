@@ -9,6 +9,7 @@ Version 1.6, released xx-xxx-2008
 	Fixed calculation of header cell heights
 	Fixed typo: caro ==> carp
 	Fixed field header alignment
+        Fixed bug in $counter being double-incremented for dynamic images
 	
 Version 1.5, released 10-Feb-2008
 
