@@ -4057,6 +4057,14 @@ When you include a font 'family', a range of fonts ( roman, italic, bold, etc ) 
 
 =back
 
+=head2 font_encoding
+
+=over 4
+
+The font encoding used which defaults to 'latin1' but can be changed ot e.g. to 'utf8'.
+
+=back
+
 =head2 default_font
 
 =over 4
