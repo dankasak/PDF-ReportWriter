@@ -294,25 +294,28 @@ sub parse_options
     # Add requested fonts
     $opt->{font_list} ||= $opt->{font} || [ 'Helvetica' ];
     
+    # Requested encoding or default latin1
+    $opt->{font_encoding} ||= 'latin1';
+    
     for my $font ( @{$opt->{font_list}} ) {
         
         # Roman fonts are easy
-        $self->{fonts}->{$font}->{Roman} = $self->{pdf}->corefont(          $font,                  -encoding => 'latin1');
+        $self->{fonts}->{$font}->{Roman} = $self->{pdf}->corefont(          $font,                  -encoding => $opt->{font_encoding});
         # The rest are f'n ridiculous. Adobe either didn't think about this, or are just stoopid
         if ($font eq 'Courier') {
-            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Courier-Bold",         -encoding => 'latin1');
-            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Courier-Oblique",      -encoding => 'latin1');
-            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Courier-BoldOblique",  -encoding => 'latin1');
+            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Courier-Bold",         -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Courier-Oblique",      -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Courier-BoldOblique",  -encoding => $opt->{font_encoding});
         }
         if ($font eq 'Helvetica') {
-            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Helvetica-Bold",       -encoding => 'latin1');
-            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Helvetica-Oblique",    -encoding => 'latin1');
-            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Helvetica-BoldOblique",-encoding => 'latin1');
+            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Helvetica-Bold",       -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Helvetica-Oblique",    -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Helvetica-BoldOblique",-encoding => $opt->{font_encoding});
         }
         if ($font eq 'Times') {
-            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Times-Bold",           -encoding => 'latin1');
-            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Times-Italic",         -encoding => 'latin1');
-            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Times-BoldItalic",     -encoding => 'latin1');
+            $self->{fonts}->{$font}->{Bold} = $self->{pdf}->corefont(       "Times-Bold",           -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{Italic} = $self->{pdf}->corefont(     "Times-Italic",         -encoding => $opt->{font_encoding});
+            $self->{fonts}->{$font}->{BoldItalic} = $self->{pdf}->corefont( "Times-BoldItalic",     -encoding => $opt->{font_encoding});
         }
     }
     
@@ -4051,6 +4054,14 @@ Be sure to avoid overlapping PDF template content and report content.
 
 An array of font names ( from the corefonts supported by PDF::API2 ) to set up.
 When you include a font 'family', a range of fonts ( roman, italic, bold, etc ) are created.
+
+=back
+
+=head2 font_encoding
+
+=over 4
+
+The font encoding used which defaults to 'latin1' but can be changed ot e.g. to 'utf8'.
 
 =back
 
